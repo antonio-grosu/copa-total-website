@@ -25,7 +25,7 @@ const AdminPage = () => {
           <h2 className="text-lg   mb-8 w-full text-left">Campionate</h2>
           <Link
             href="/"
-            className=" p-2 w-auto inline-flex  items-center justify-center gap-1 font-semibold text-sm text-center rounded-sm bg-green-300"
+            className=" p-2 w-auto inline-flex  items-center justify-center gap-1 font-semibold text-sm text-center rounded-md bg-green-300"
           >
             <svg
               className="w-6 h-6 text-gray-950"
@@ -51,11 +51,11 @@ const AdminPage = () => {
               key={index}
               className="border-2  p-4 rounded-md border-orange-300/50"
             >
-              <h3 className="text-sm">{championship.name}</h3>
+              <h3 className="text-sm font-semibold">{championship.name}</h3>
               <div className="w-full mt-2 flex justify-end">
                 <Link
-                  href="/"
-                  className="p-2 text-sm flex items-center justify-center gap-1 font-medium  rounded-sm bg-orange-300/50"
+                  href={`/admin/championships/${championship._id}`}
+                  className="p-2 text-sm flex items-center justify-center gap-1 font-medium  rounded-md bg-orange-300/50"
                 >
                   <svg
                     className="w-6 h-6 text-gray-950 "
@@ -89,7 +89,7 @@ const AdminPage = () => {
           <h2 className="text-lg   mb-8 w-full text-left">Turnee</h2>
           <Link
             href="/"
-            className=" p-2 w-auto inline-flex items-center justify-center gap-1 font-semibold text-sm text-center rounded-sm bg-green-300"
+            className=" p-2 w-auto inline-flex items-center justify-center gap-1 font-semibold text-sm text-center rounded-md bg-green-300"
           >
             <svg
               className="w-6 h-6 text-gray-950"
@@ -115,11 +115,11 @@ const AdminPage = () => {
             className="border-2 p-4 rounded-md w-5/12 border-orange-300/50"
           >
             {" "}
-            <h3 className="text-sm">{tournament.name}</h3>
+            <h3 className="text-sm font-semibold">{tournament.name}</h3>
             <div className="w-full mt-2 flex justify-end">
               <Link
                 href="/"
-                className="p-2 text-sm flex items-center justify-center gap-1 font-medium  rounded-sm bg-orange-300/50"
+                className="p-2 text-sm flex items-center justify-center gap-1 font-medium  rounded-md bg-orange-300/50"
               >
                 <svg
                   className="w-6 h-6 text-gray-950 "

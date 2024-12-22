@@ -7,7 +7,7 @@ export const metadata = {
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-orange-300/50 fixed top-0 py-4 font">
+    <nav className="w-full bg-white shadow-md fixed top-0 py-4 font">
       <div className="container mx-auto">
         <h1 className="text-xl font-semibold text-gray-950">
           Adminstrare Campionate si Turnee
