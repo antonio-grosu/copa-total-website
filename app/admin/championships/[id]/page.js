@@ -7,6 +7,7 @@ const EventPage = () => {
   const { id } = useParams();
   const [championship, setChampionship] = useState({});
   const [addMatchModal, setAddMatchModal] = useState(false);
+  const [selectedMatch, setSelectedMatch] = useState(null);
   const [editMatchModal, setEditMatchModal] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
   const [match, setMatch] = useState({
@@ -23,10 +24,9 @@ const EventPage = () => {
       .then((data) => setChampionship(data))
       .catch((error) => console.error("Error fetching championship:", error));
   }, []);
-
   if (championship)
     return (
-      <div className="bg-white p-4 min-h-screen text-gray-950 py-44 font">
+      <div className="bg-white p-4 relative min-h-screen w-full text-gray-950 py-44 font">
         <div className=" bg-white w-7/12 mx-auto flex flex-col items-center">
           <div className="flex items-center w-full justify-between">
             <h1 className="text-xl font-bold  w-full text-left">
@@ -181,7 +181,10 @@ const EventPage = () => {
                     </div>
                     <div className="w-full flex justify-end">
                       <button
-                        onClick={() => setEditMatchModal(!editMatchModal)}
+                        onClick={() => {
+                          setEditMatchModal(!editMatchModal);
+                          setSelectedMatch(match);
+                        }}
                         className="p-2 text-sm  items-center inline-flex mt-4 justify-center gap-1 font-medium  rounded-md bg-orange-300/50"
                       >
                         <svg
@@ -208,20 +211,53 @@ const EventPage = () => {
                       </button>
                     </div>
                   </div>
-                  {editMatchModal && (
-                    <div
-                      key={match}
-                      className=" p-4 shadow-md w-7/12 mx-auto mb-8"
-                    >
-                      <h2 className="w-full text-center font-semibold ">
-                        Modificare Rezultat Meci
-                      </h2>
-                    </div>
-                  )}
                 </React.Fragment>
               ))}
           </div>
         </div>
+        {editMatchModal && (
+          <div className=" p-4 bg-orange-200 shadow-xl rounded-md  absolute top-[50%] left-[35%] shadow-md mx-auto w-3/12  mb-8">
+            <h2 className="w-full text-center font-semibold ">
+              Modificare Rezultat Meci
+            </h2>
+            <form
+              className="flex flex-col gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const updatedChampionship = {
+                  // ...championship,
+                  // matches: championship.matches.map((match) =>
+                  //   match === selectedMatch ? { ...match, ...match } : match
+                  // ),
+                };
+
+                fetch(`/api/championships/${id}`, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(updatedChampionship),
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      console.log(response);
+                      setSuccessModal(true);
+                      setTimeout(() => {
+                        setSuccessModal(false);
+                        setEditMatchModal(false);
+                        window.location.reload();
+                      }, 2000);
+                    } else {
+                      console.error("Error updating championship:", response);
+                    }
+                  })
+                  .catch((error) =>
+                    console.error("Error updating match:", error)
+                  );
+              }}
+            ></form>
+          </div>
+        )}
       </div>
     );
 };
