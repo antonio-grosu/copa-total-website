@@ -26,7 +26,6 @@ const EventPage = () => {
       red: 0,
     },
   });
-  console.log(selectedMatch);
   useEffect(() => {
     fetch(`/api/championships/${id}`)
       .then((response) => response.json())
