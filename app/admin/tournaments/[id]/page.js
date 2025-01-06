@@ -44,7 +44,7 @@ const EventPage = () => {
   useEffect(() => {
     fetch(`/api/tournaments/${id}`)
       .then((response) => response.json())
-      .then((data) => setTournament(data))
+      .then((data) => setTournament(Object.assign({}, data)))
       .catch((error) => console.error("Error fetching championship:", error))
       .finally(() => setLoading(false));
   }, []);
