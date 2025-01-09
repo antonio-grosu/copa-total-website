@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const EventPage = () => {
   const { id } = useParams();
